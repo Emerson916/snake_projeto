@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+   
+    <title>Snake_Game || The Game</title>
+</head>
+<body>
+    <canvas id="palco" width="400" height="400"></canvas>
+    <script type="text/javascript">
+    
+
+        window.onload = function(){
+
+            var palco = document.getElementById('palco');
+            var context = palco.getContext("2d");
+            document.addEventListener('keydown', keyPush)
+            setInterval(game, 80);
+
+            const velocidade = 1;
+
+            var vx = vy = 0;
+            var px = 10;
+            var py = 15;
+            var tamanhoPeca = 20;
+            var quantidadePeca = 20;
+            var macax = macay = 15;
+
+            var rastro = [];
+            tail = 5;
+
+
+            function game(){
+                px += vx;
+                py += vy;
+                if(px <0){
+                    px = quantidadePeca - 1;
+                }
+                if (px > quantidadePeca - 1){
+                    px = 0;
+                }
+                if(py < 0){
+                    py = quantidadePeca - 1;
+                }
+                if(py > quantidadePeca - 1){
+                    py = 0;
+                }
+               
+
+                context.fillStyle = "black";
+                context.fillRect(0,0, palco.width, palco.height);
+
+                context.fillStyle = "red";
+                context.fillRect(macax*tamanhoPeca, macay*tamanhoPeca, tamanhoPeca, tamanhoPeca);
+
+                context.fillStyle = 'gray';
+                for (var i = 0; i < rastro.length; i++){
+                    context.fillRect(rastro[i].x*tamanhoPeca, rastro[i].y*tamanhoPeca, tamanhoPeca -1,tamanhoPeca -1)
+
+                    if(rastro[i].x == px && rastro[i].y == py){
+                        vx = vy = 0;
+                        tail = 5;
+                    }
+                }
+
+                rastro.push({x:px, y:py})
+                while (rastro.length > tail){
+                    rastro.shift();
+                }
+
+                if(macax == px && macay == py){
+                    tail++;
+                    macax = Math.floor(Math.random()*quantidadePeca);
+                    macay = Math.floor(Math.random()*quantidadePeca);
+                }
+
+            }
+
+            function keyPush(event){
+                switch (event.keyCode){
+                    case 37: //left
+                        vx = -velocidade;
+                        vy = 0;
+                        break;
+                    case 38: // up
+                        vx = 0;
+                        vy = -velocidade;
+                        break;
+                    case 39: // right
+                        vx = velocidade;
+                        vy = 0;
+                        break; //down
+                    case 40: 
+                        vx = 0;
+                        vy = velocidade;
+                        break;
+                    default:
+
+                    break;
+                }
+            }
+        }
+        
+    </script>
+</body>
+</html>
