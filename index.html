@@ -9,7 +9,11 @@
     <title>Snake_Game || The Game</title>
 </head>
 <body>
-    <canvas id="palco" width="400" height="400"></canvas>
+    <div class="style">
+        <h1>Snake_Game || The Game</h1>
+
+    
+    <canvas id="palco" width="570" height="570"></canvas>
     <script type="text/javascript">
     
 
@@ -18,15 +22,15 @@
             var palco = document.getElementById('palco');
             var context = palco.getContext("2d");
             document.addEventListener('keydown', keyPush)
-            setInterval(game, 80);
+            setInterval(game, 110);
 
             const velocidade = 1;
 
             var vx = vy = 0;
             var px = 10;
             var py = 15;
-            var tamanhoPeca = 20;
-            var quantidadePeca = 20;
+            var tamanhoPeca = 15;
+            var quantidadePeca = 40;
             var macax = macay = 15;
 
             var rastro = [];
@@ -50,13 +54,13 @@
                 }
                
 
-                context.fillStyle = "black";
+                context.fillStyle = "#262626";
                 context.fillRect(0,0, palco.width, palco.height);
 
-                context.fillStyle = "red";
+                context.fillStyle = '#ed1313';
                 context.fillRect(macax*tamanhoPeca, macay*tamanhoPeca, tamanhoPeca, tamanhoPeca);
 
-                context.fillStyle = 'gray';
+                context.fillStyle = '#0fbf0f';
                 for (var i = 0; i < rastro.length; i++){
                     context.fillRect(rastro[i].x*tamanhoPeca, rastro[i].y*tamanhoPeca, tamanhoPeca -1,tamanhoPeca -1)
 
@@ -105,5 +109,6 @@
         }
         
     </script>
+    </div>
 </body>
 </html>
